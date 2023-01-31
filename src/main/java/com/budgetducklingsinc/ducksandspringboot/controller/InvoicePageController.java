@@ -1,7 +1,7 @@
 package com.budgetducklingsinc.ducksandspringboot.controller;
 
 import ch.qos.logback.core.model.Model;
-import com.budgetducklingsinc.ducksandspringboot.model.PaymentTable;
+import com.budgetducklingsinc.ducksandspringboot.model.Payment;
 import com.budgetducklingsinc.ducksandspringboot.service.InvoiceService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
@@ -23,8 +24,8 @@ public class InvoicePageController {
     @GetMapping
     protected String showInvoicePage(Model model, HttpSession session) {
         String username = (String) session.getAttribute("username");
-        PaymentTable userPaymentsList = invoiceService.getPaymentsList(username);
-        model.addAttribute("payments", userPaymentsList.getPaymentsList());
+        invoiceService.getPaymentList(username);
+        model.addAttribute("payment", payment.getPaymentList());
 
         return "invoicePage";
     }
@@ -36,13 +37,13 @@ public class InvoicePageController {
     }
 
     @GetMapping
-    protected String selectPayment(Model model, HttpSession session, @RequestParam int id) {
+    protected String selectPayment(Model model, HttpSession session, @RequestParam int id) throws SQLException {
         String username = (String) session.getAttribute("username");
-        ArrayList<PaymentTable> PaymentTable = new ArrayList<>();
-        PaymentTable selectedPayment = invoiceService.selectPayment(username, id);
+        ArrayList<Payment> Payment = new ArrayList<>();
+        Payment selectedPayment = invoiceService.selectPayment(username, id);
 
-        PaymentTable.add(selectedPayment);
-        model.addAttribute("payment table", paymentTable);
+        Payment.add(selectedPayment);
+        model.addAttribute("payment", payment.selectPayment());
         return"redirect:editPage.html";
 
     }

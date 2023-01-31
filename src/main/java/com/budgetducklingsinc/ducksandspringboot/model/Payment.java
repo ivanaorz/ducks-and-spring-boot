@@ -1,6 +1,6 @@
 package com.budgetducklingsinc.ducksandspringboot.model;
 
-public class PaymentTable {
+public class Payment {
 
     private int id;
     private String title;
@@ -11,7 +11,7 @@ public class PaymentTable {
 
 
 
-    public PaymentTable(int id, String title, String dateOfPayment, String description, String category, double price) {
+    public Payment(int id, String title, String dateOfPayment, String description, String category, double price) {
         this.id = id;
         this.title = title;
         this.dateOfPayment = dateOfPayment;
@@ -21,7 +21,7 @@ public class PaymentTable {
 
     }
 
-    public PaymentTable() {
+    public Payment() {
 
     }
 

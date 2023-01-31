@@ -1,6 +1,6 @@
 package com.budgetducklingsinc.ducksandspringboot;
 
-import com.budgetducklingsinc.ducksandspringboot.model.PaymentTable;
+import com.budgetducklingsinc.ducksandspringboot.model.Payment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class DucksAndSpringBootApplication {
     }
 
     @GetMapping
-    public List<PaymentTable> getPayments() {
+    public List<Payment> getPayments() {
         return List.of();
     }
 

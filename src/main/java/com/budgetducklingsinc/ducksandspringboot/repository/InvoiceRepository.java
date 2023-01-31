@@ -1,6 +1,7 @@
 package com.budgetducklingsinc.ducksandspringboot.repository;
 
 import com.budgetducklingsinc.ducksandspringboot.db.MysqlDatabase;
+import com.budgetducklingsinc.ducksandspringboot.model.Payment;
 
 
 import java.sql.*;
@@ -9,13 +10,15 @@ public class InvoiceRepository {
 
     private MysqlDatabase db;
     private Connection connection;
+
     public InvoiceRepository() {
         db = MysqlDatabase.getInstance();
         connection = db.getConnection();
     }
-    public void getPaymentsList() throws SQLException {
-        Statement statement = connection.createStatement();
 
+    public void getPaymentList() throws SQLException {
+        Statement statement = connection.createStatement();
+//        Payment payment = new Payment();
         String sql = "SELECT * FROM payment WHERE username=?";
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -29,32 +32,34 @@ public class InvoiceRepository {
         }
         resultSet.close();
         statement.close();
-}
+    }
 
     public void updatePayment(String username, int id) throws SQLException {
-    String sql = "UPDATE payment" + "SET username=?, title=?, dateOfPayment=?, description=?, category=?, price]?" + "WHERE id=?";
-    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-    preparedStatement.setString(1, "username");
-    preparedStatement.setString(2, "title");
-    preparedStatement.setString(3, "dateOfPayment");
-    preparedStatement.setString(4, "description");
-    preparedStatement.setString(5, "category");
-    preparedStatement.setString(6, "price");
-    preparedStatement.setInt(7, id);
-    preparedStatement.execute();
-}
+        String sql = "UPDATE payment" + "SET username=?, title=?, dateOfPayment=?, description=?, category=?, price]?" + "WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, "title");
+        preparedStatement.setString(3, "dateOfPayment");
+        preparedStatement.setString(4, "description");
+        preparedStatement.setString(5, "category");
+        preparedStatement.setString(6, "price");
+        preparedStatement.setInt(7, id);
+        preparedStatement.execute();
+// }
 
-//     preparedStatement.close();
-//}
+     preparedStatement.close();
+
+}
 
     public void deletePayment(String username, int id) throws SQLException {
         String sql = "DELETE from payment" + "WHERE username=? AND id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setString(1, "username");
+        preparedStatement.setString(1, username);
         preparedStatement.setInt(2, id);
 
         preparedStatement.execute();
+        preparedStatement.close();
     }
 
     public void createPayment() throws SQLException {
@@ -71,19 +76,19 @@ public class InvoiceRepository {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-
+        resultSet.close();
     }
 
     public void selectPayment(String username, int id) throws SQLException {
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
         String sql = "SELECT * FROM payment WHERE username=? AND id=?";
 
-
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, username);
             preparedStatement.setInt(2, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-
+            resultSet.next();
+            resultSet.close();
     }
 }

@@ -1,18 +1,18 @@
 package com.budgetducklingsinc.ducksandspringboot.model;
 
-public class EmployeeTable {
+public class Employee {
 
 
     private String username;
     private String password;
 
-    public EmployeeTable( String username, String password) {
+    public Employee(String username, String password) {
 
            this.username = username;
            this.password = password;
     }
 
-    public EmployeeTable() {
+    public Employee() {
 
     }
 
