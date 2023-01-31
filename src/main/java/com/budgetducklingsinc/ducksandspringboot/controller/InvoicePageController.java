@@ -6,11 +6,13 @@ import com.budgetducklingsinc.ducksandspringboot.service.InvoiceService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 @Controller
 @RequestMapping("/invoicePage/")
@@ -22,10 +24,12 @@ public class InvoicePageController {
     }
 
     @GetMapping
-    protected String showInvoicePage(Model model, HttpSession session) {
+//    @ModelAttribute("payment")
+    protected String showInvoicePage(Model model, HttpSession session) throws SQLException {
         String username = (String) session.getAttribute("username");
+        ArrayList<Payment> payment = new ArrayList<>();
         invoiceService.getPaymentList(username);
-        model.addAttribute("payment", payment.getPaymentList());
+        model.addAttribute("payment", payment);
 
         return "invoicePage";
     }
@@ -39,11 +43,11 @@ public class InvoicePageController {
     @GetMapping
     protected String selectPayment(Model model, HttpSession session, @RequestParam int id) throws SQLException {
         String username = (String) session.getAttribute("username");
-        ArrayList<Payment> Payment = new ArrayList<>();
+        ArrayList<Payment> payment = new ArrayList<>();
         Payment selectedPayment = invoiceService.selectPayment(username, id);
 
         Payment.add(selectedPayment);
-        model.addAttribute("payment", payment.selectPayment());
+        model.addAttribute("payment", payment);
         return"redirect:editPage.html";
 
     }

@@ -5,6 +5,7 @@ import com.budgetducklingsinc.ducksandspringboot.model.Payment;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class InvoiceRepository {
 
@@ -16,12 +17,13 @@ public class InvoiceRepository {
         connection = db.getConnection();
     }
 
-    public void getPaymentList() throws SQLException {
+    public void getPaymentList(String username) throws SQLException {
         Statement statement = connection.createStatement();
-//        Payment payment = new Payment();
+
         String sql = "SELECT * FROM payment WHERE username=?";
         ResultSet resultSet = statement.executeQuery(sql);
-
+//        ArrayList<Payment> paymentList = new ArrayList<>();
+//        Payment payment = new Payment();
         while (resultSet.next()) {
             resultSet.getString("username");
             resultSet.getString("title");
