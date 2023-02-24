@@ -2,15 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Payment Page</title>
 </head>
 <body>
 
-<form action="paymentPage" method="POST" xmlns:th="http://www.w3.org/1999/xhtml">
-    <h2>Create payment</h2>
-    </p>
-    <button type="submit">OK</button>
-</form>
+<form action="paymentPage" method="POST">
+    <h2>Create a new payment</h2>
 
+    <div>
+        <label>Date</label>
+        <input type="date" name="date">
+    </div>
+    <div>
+        <label>Title</label>
+        <input type="text" name="title">
+    </div>
+    <div>
+        <label>Description</label>
+        <input type="text" name="description">
+    </div>
+    <div>
+        <label>Category</label>
+        <input type="text" name="category">
+    </div>
+    <div>
+        <label>Price</label>
+        <input type="number" name="price">
+    </div>
+    <br>
+    <button type="submit">OK</button>
+    <br>
+    <a href="/invoicePage">To home page</a>
+    <br>
+    <button type="submit">Logout</button>
+</form>
 </body>
 </html>

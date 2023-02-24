@@ -22,16 +22,12 @@ public class EditPageController {
 
 
     @PostMapping
-    protected String updatePayment(HttpSession session, @ModelAttribute int id) throws SQLException {
-        String username = (String) session.getAttribute("username");
-        invoiceService.updatePayment(username, id);
-        return "redirect:invoicePage";
+    protected String updatePayment(HttpSession session, @ModelAttribute Payment payment) throws SQLException {
+        if (session.getAttribute("username") != null) {
+            invoiceService.updatePayment(payment);
+            return "redirect:invoicePage";
+        }
+        return "redirect:login";
     }
 
-    @PostMapping
-    protected String deletePayment(HttpSession session, @ModelAttribute int id) throws SQLException {
-        String username = (String) session.getAttribute("username");
-        invoiceService.deletePayment(username, id);
-        return "redirect:invoicePage";
-    }
 }

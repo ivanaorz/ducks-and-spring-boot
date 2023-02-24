@@ -18,6 +18,7 @@ public class UserSessionController {
     }
     @GetMapping("login")
     public String showLoginPage() {
+
         return "loginPage";
     }
 
@@ -41,7 +42,7 @@ public class UserSessionController {
                 return "redirect:/invoicePage.html";
             }
 
-                return "redirect:login";
+                return "redirect:login.html";
             }
         }
 

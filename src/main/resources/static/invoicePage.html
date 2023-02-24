@@ -1,30 +1,50 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--</body>-->
-<!--</html>-->
-
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice Page</title>
+</head>
+<body>
 
 <form action="invoicePage" method="GET">
-    <div>
-        <label>Username</label>
-        <input type="text" name="username" />
-    </div>
-    <div>
-        <label>Id</label>
-        <input type="password" name="password"/>
-    </div>
+    <h2>Welcome to home page</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
 
+        <tbody>
+        <tr th:each="payment: ${payments}">
+            <td th:text="${payment.id}" />
+            <td th:text="${payment.date}" />
+            <td th:text="${payment.title}" />
+            <td th:text="${payment.description}" />
+            <td th:text="${payment.category}" />
+            <td th:text="${payment.price}" />
+            <td><a th:href="@{'/payment/delete/' + ${payment.id}}">Delete</a></td>
+            <td>  |  </td>
+            <td><a th:href="@{'/payment/update/' + ${payment.id}}">Update</a></td>
+        </tr>
+        </tbody>
+    </table>
     <br>
-    <button type="submit">Edit payment</button>
-
-  <br>
-  <button type="submit">Create payment</button>
-
+    <button type="submit">Delete</button>
+    <br>
+    <a href="/editPage">Update</a>
+    <br>
+    <a href="/paymentPage">Create a new payment</a>
+    <br>
     <button type="submit">Logout</button>
 </form>
+</body>
+</html>
