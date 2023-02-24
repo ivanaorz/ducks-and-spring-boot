@@ -21,8 +21,8 @@ public class PaymentPageController {
 
     @PostMapping
     protected String createPayment(HttpSession session, @ModelAttribute Payment payment) throws SQLException {
-        String username = (String) session.getAttribute("username");
-        invoiceService.createPayment(username, payment);
+        int userId = (int) session.getAttribute("userId");
+        invoiceService.createPayment(userId, payment);
         return "redirect:invoicePage";
     }
 }

@@ -3,8 +3,8 @@ package com.budgetducklingsinc.ducksandspringboot.model;
 public class Payment {
 
     private int id;
-    private String title;
     private String dateOfPayment;
+    private String title;
     private String description;
     private String category;
     private double price;
@@ -65,7 +65,7 @@ public class Payment {
         this.category = category;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

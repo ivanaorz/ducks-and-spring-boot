@@ -12,15 +12,14 @@ public class InvoiceService {
 
     private InvoiceRepository invoiceRepository;
 
-    private Payment updatePayment;
 
 
     public InvoiceService() {
         this.invoiceRepository = new InvoiceRepository();
     }
 
-    public void updatePayment(String username, int id) throws SQLException {
-        invoiceRepository.updatePayment(username, id);
+    public void updatePayment(Payment payment) throws SQLException {
+        invoiceRepository.updatePayment(payment);
     }
 
     public void deletePayment(String username, int id) throws SQLException {
@@ -28,19 +27,18 @@ public class InvoiceService {
     }
 
     public Payment selectPayment(String username, int id) throws SQLException {
-        Payment selectedPayment = invoiceRepository.selectPayment(username, id);
-        if (selectedPayment != null) {
-            updatePayment = selectedPayment;
-        }
+        Payment selectedPayment = new Payment();
+        invoiceRepository.selectPayment(username, id);
         return selectedPayment;
     }
 
-    public void createPayment(String username, Payment payment) throws SQLException {
-        invoiceRepository.createPayment();
+
+    public void createPayment(int userId, Payment payment) throws SQLException {
+        invoiceRepository.createPayment(userId, payment);
     }
 
-    public List<Payment> getPaymentList(String username) throws SQLException {
-        List<Payment> paymentLists = new ArrayList<>();
+    public ArrayList<Payment> getPaymentList(String username)  {
+        ArrayList<Payment> paymentLists = new ArrayList<>();
         invoiceRepository.getPaymentList(username);
         return paymentLists;
     }

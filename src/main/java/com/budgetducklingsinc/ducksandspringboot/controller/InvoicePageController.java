@@ -1,14 +1,12 @@
 package com.budgetducklingsinc.ducksandspringboot.controller;
 
-import ch.qos.logback.core.model.Model;
+//import ch.qos.logback.core.model.Model;
 import com.budgetducklingsinc.ducksandspringboot.model.Payment;
 import com.budgetducklingsinc.ducksandspringboot.service.InvoiceService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,13 +21,13 @@ public class InvoicePageController {
         this.invoiceService = new InvoiceService();
     }
 
+
     @GetMapping
-//    @ModelAttribute("payment")
-    protected String showInvoicePage(Model model, HttpSession session) throws SQLException {
+    protected String showAllPaymentsInvoicePage(Model model, HttpSession session)  {
         String username = (String) session.getAttribute("username");
-        ArrayList<Payment> payment = new ArrayList<>();
+        ArrayList<Payment> payments = new ArrayList<>();
         invoiceService.getPaymentList(username);
-        model.addAttribute("payment", payment);
+        model.addAttribute("payments", payments);
 
         return "invoicePage";
     }
@@ -40,22 +38,29 @@ public class InvoicePageController {
         return "redirect:paymentPage.html";
     }
 
+@ModelAttribute
     @GetMapping
     protected String selectPayment(Model model, HttpSession session, @RequestParam int id) throws SQLException {
         String username = (String) session.getAttribute("username");
-        ArrayList<Payment> payment = new ArrayList<>();
-        Payment selectedPayment = invoiceService.selectPayment(username, id);
-
-        Payment.add(selectedPayment);
+        Payment payment = invoiceService.selectPayment(username, id);
         model.addAttribute("payment", payment);
         return"redirect:editPage.html";
 
     }
 
+
+
     @GetMapping
     protected String showEditPage(HttpSession session) {
         session.getAttribute("username");
         return "redirect:editPage.html";
+    }
+
+    @PostMapping
+    protected String deletePayment(HttpSession session, @ModelAttribute int id) throws SQLException {
+        String username = (String) session.getAttribute("username");
+        invoiceService.deletePayment(username, id);
+        return "redirect:invoicePage";
     }
 }
 
