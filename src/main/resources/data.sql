@@ -7,10 +7,10 @@ CREATE TABLE users (
 );
 
 
-INSERT INTO users (username, password) VALUES ("Tony", "123");
-INSERT INTO users (username, password) VALUES ("Thor", "123");
-INSERT INTO users (username, password) VALUES ("Natasha", "123");
-INSERT INTO users (username, password) VALUES ("Stephen", "123");
+INSERT INTO users (username, password) VALUES ("Tony", "123"),
+                                             ("Thor", "123"),
+                                             ("Natasha", "123"),
+                                             ("Stephen", "123");
 
 
 DROP TABLE IF EXISTS payment;
@@ -26,10 +26,7 @@ CREATE TABLE payment (
 );
 
 INSERT INTO payment (username, dateOfPayment, title, description, category, price) VALUES
-    ("Tony", "2010-03-15", "buying equipment", "equipment for the new suit", "equipment", "10 000 000");
-INSERT INTO payment (username, dateOfPayment, title, description, category, price) VALUES
-    ("Thor", "2014-05-04", "buying ticket", "ticket to go home", "travel", "10");
-INSERT INTO payment (username, dateOfPayment, title, description, category, price) VALUES
-     ("Natasha", "2017-02-04", "buying training clothes", "to train", "training", "10 000");
-INSERT INTO payment (username, dateOfPayment, title, description, category, price) VALUES
+    ("Tony", "2010-03-15", "buying equipment", "equipment for the new suit", "equipment", "10 000 000"),
+    ("Thor", "2014-05-04", "buying ticket", "ticket to go home", "travel", "10"),
+     ("Natasha", "2017-02-04", "buying training clothes", "to train", "training", "10 000"),
     ("Stephen", "2011-05-06", "buying books", "to learn how to travel through universes", "studies", "100");

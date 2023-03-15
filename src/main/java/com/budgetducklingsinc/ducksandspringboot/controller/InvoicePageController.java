@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 @Controller
-@RequestMapping("/invoicePage/")
+@RequestMapping
 public class InvoicePageController {
     private InvoiceService invoiceService;
 
@@ -22,7 +22,7 @@ public class InvoicePageController {
     }
 
 
-    @GetMapping
+    @GetMapping("invoicePage")
     protected String showAllPaymentsInvoicePage(Model model, HttpSession session)  {
         String username = (String) session.getAttribute("username");
         ArrayList<Payment> payments = new ArrayList<>();
@@ -32,14 +32,14 @@ public class InvoicePageController {
         return "invoicePage";
     }
 
-    @GetMapping
+    @GetMapping("paymentPage")
     protected String showPaymentPage(HttpSession session) {
         session.getAttribute("username");
         return "redirect:paymentPage.html";
     }
 
 @ModelAttribute
-    @GetMapping
+    @GetMapping("editPage")
     protected String selectPayment(Model model, HttpSession session, @RequestParam int id) throws SQLException {
         String username = (String) session.getAttribute("username");
         Payment payment = invoiceService.selectPayment(username, id);
@@ -50,13 +50,13 @@ public class InvoicePageController {
 
 
 
-    @GetMapping
+    @GetMapping("editPage")
     protected String showEditPage(HttpSession session) {
         session.getAttribute("username");
         return "redirect:editPage.html";
     }
 
-    @PostMapping
+    @PostMapping("invoicePage/delete")
     protected String deletePayment(HttpSession session, @ModelAttribute int id) throws SQLException {
         String username = (String) session.getAttribute("username");
         invoiceService.deletePayment(username, id);

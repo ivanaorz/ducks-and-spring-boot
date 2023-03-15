@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/paymentPage/")
+@RequestMapping()
 public class PaymentPageController {
     private InvoiceService invoiceService;
 
@@ -19,7 +19,7 @@ public class PaymentPageController {
         this.invoiceService = new InvoiceService();
     }
 
-    @PostMapping
+    @PostMapping("paymentPage")
     protected String createPayment(HttpSession session, @ModelAttribute Payment payment) throws SQLException {
         int userId = (int) session.getAttribute("userId");
         invoiceService.createPayment(userId, payment);

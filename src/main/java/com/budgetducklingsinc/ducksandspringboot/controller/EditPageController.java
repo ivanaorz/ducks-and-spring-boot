@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/editPage/")
+@RequestMapping()
 public class EditPageController {
-    private InvoiceService invoiceService;
+   private InvoiceService invoiceService;
 
     public EditPageController() {
         this.invoiceService = new InvoiceService();
@@ -21,7 +21,7 @@ public class EditPageController {
 
 
 
-    @PostMapping
+    @PostMapping("editPage")
     protected String updatePayment(HttpSession session, @ModelAttribute Payment payment) throws SQLException {
         if (session.getAttribute("username") != null) {
             invoiceService.updatePayment(payment);
